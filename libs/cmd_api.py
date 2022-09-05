@@ -7,7 +7,12 @@ from libs.constants import DB_NAME, COL_STOCKS
 from libs.mongo_service import MongoService
 
 
-@click.group(name="stock")
+@click.group(name="api")
+def api_cmd():
+    pass
+
+
+@api_cmd.group(name="stock")
 def stock_cmd():
     pass
 
@@ -15,12 +20,10 @@ def stock_cmd():
 @stock_cmd.command(name="add")
 @click.option('--ticker', required=True)
 def add_stock(ticker):
-    stock_db = stock_service.get_one_stock_from_api(ticker)
-    MongoService.insert(COL_STOCKS, stock_db.__dict__)
+    pass
 
 
 @stock_cmd.command(name="ls")
 def show_all_stocks():
-    data = MongoService.get_all(COL_STOCKS)
-    print(json.dumps(data, indent=2))
+    pass
 

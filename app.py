@@ -6,6 +6,8 @@ from flask_cors import CORS
 
 from libs import constants
 from libs import stock_service
+from libs.mongo_service import MongoService
+from libs.constants import DB_NAME
 
 """
 CRUD records
@@ -40,6 +42,7 @@ def one_stock_endpoint(ticker):
 
 
 def main():
+    MongoService.init(DB_NAME)
     app.run(debug=True, host='0.0.0.0', port=8080, threaded=True)
 
 

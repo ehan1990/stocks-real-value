@@ -7,5 +7,9 @@ db-ssh:
 apple:
 	@curl -s localhost:8080/stocks/aapl
 
+# TICKER=aapl make stock
+stock:
+	@curl -s localhost:8080/stocks/${TICKER}
+
 health:
 	@curl -s localhost:8080/healthcheck | jq

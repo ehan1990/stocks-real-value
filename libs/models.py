@@ -8,6 +8,11 @@ class StockDB:
         self.eps = eps
         self.pe = pe
 
+    @staticmethod
+    def from_db(data: dict):
+        stock_db = StockDB(data["ticker"], data["name"], data["current_price"], data["eps"], data["pe"])
+        return stock_db
+
 
 class StockModel(StockDB):
 

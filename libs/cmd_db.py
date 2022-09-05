@@ -7,7 +7,12 @@ from libs.constants import DB_NAME, COL_STOCKS
 from libs.mongo_service import MongoService
 
 
-@click.group(name="stock")
+@click.group(name="db")
+def db_cmd():
+    pass
+
+
+@db_cmd.group(name="stock")
 def stock_cmd():
     pass
 
