@@ -20,7 +20,14 @@ def get_one_stock(ticker: str) -> StockModel:
     else:
         stock_db = get_one_stock_from_api(ticker)
         MongoService.insert(COL_STOCKS, stock_db.__dict__)
+
+    if not stock_db.pe:
+        raise Exception(f"P/E is null for {stock_db.name}")
     stock_model = StockModel(stock_db, 0.05, 0.1, 10)
     return stock_model
 
+
+def delete_one_stock(ticker: str):
+    q = {"ticker": ticker}
+    MongoService.delete_one(COL_STOCKS, q)
 

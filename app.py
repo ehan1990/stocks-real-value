@@ -9,12 +9,6 @@ from libs import stock_service
 from libs.mongo_service import MongoService
 from libs.constants import DB_NAME
 
-"""
-CRUD records
-ACL on IAM
-
-"""
-
 
 app = Flask(__name__)
 CORS(app)
@@ -37,8 +31,13 @@ def healthcheck_endpoint():
 
 @app.route("/stocks/<ticker>", methods=["GET"])
 def one_stock_endpoint(ticker):
-    stock = stock_service.get_one_stock(ticker)
-    return jsonify(stock.__dict__)
+    try:
+        stock = stock_service.get_one_stock(ticker)
+        return jsonify(stock.__dict__)
+    except Exception as e:
+        res = {"msg": "unable to retrieve stock data"}
+        logging.error(e)
+        return jsonify(res), 500
 
 
 def main():

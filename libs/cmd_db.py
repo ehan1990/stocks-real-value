@@ -29,3 +29,16 @@ def show_all_stocks():
     data = MongoService.get_all(COL_STOCKS)
     print(json.dumps(data, indent=2))
 
+
+@stock_cmd.command(name="del")
+@click.option('--ticker', required=True)
+def del_stock(ticker):
+    stock_service.delete_one_stock(ticker)
+
+
+@stock_cmd.command(name="delall")
+def del_all_stock():
+    stocks = MongoService.get_all(COL_STOCKS)
+    for stock in stocks:
+        ticker = stock.get("ticker")
+        stock_service.delete_one_stock(ticker)

@@ -2,7 +2,7 @@
 class StockDB:
 
     def __init__(self, ticker: str, name: str, current_price: float, eps: float, pe: float):
-        self.ticker = ticker
+        self.ticker = ticker.upper()
         self.name = name
         self.current_price = current_price
         self.eps = eps
